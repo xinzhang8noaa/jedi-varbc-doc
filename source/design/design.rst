@@ -60,6 +60,36 @@ ObsBias Design
       namespace ufo #03fcf0 {
         
           class ObsBias {
+            + {static} classname() : string
+            + ObsBias(ObsSpace &, Configuration &) : void
+            + ObsBias(ObsBias &, bool) : void
+            + ~ObsBias() : void
+
+            + operator+=(ObsBiasIncrement &) : ObsBias
+            + operator=(ObsBias &) : ObsBias
+            + operator[](int) : double
+            + operator bool() : bool
+
+            + read(Configuration &) : void
+            + write(Configuration &) : void
+            + norm() : double
+            + size() : size_t
+            + computeObsBias(:ObsVector [] &, ObsDataVector [] &, ioda::ObsDataVector [] &) : void
+            + computeObsBiasPredictors(GeoVaLs &, ObsDiagnostics &, ObsDataVector [] &) : void
+
+            + requiredGeoVaLs() : Variable
+            + requiredHdiagnostics() : Variable
+            + predNames() : Variable
+            + config() : Configuration
+            + obspace() : ObsSpace
+
+
+            - print(std::ostream &) : void
+            - biasbase_ : ObsBiasBase *
+            - conf_ : LocalConfiguration
+            - geovars_ : Variable
+            - hdiags_ : Variable
+            - predNames_ : Variable
           }
           
           class ObsBiasIncrement {
