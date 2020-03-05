@@ -4,13 +4,17 @@ ObsBias Design
 .. uml::
 
     @startuml
- 
-        'style options 
-        skinparam monochrome true
-        skinparam circledCharacterRadius 9
-        skinparam circledCharacterFontSize 8
-        skinparam classAttributeIconSize 0
-        hide empty members
+
+      package "ObsBias" {
+
+        package "oops" {
+        }
+
+        package "ufo" {
+        }
+
+        oops --> "1" ufo
+      }
 
         abstract class ObsBias {
           - privateField
