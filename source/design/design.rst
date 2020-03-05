@@ -11,8 +11,8 @@ ObsBias Design
         skinparam circledCharacterFontSize 8
         skinparam classAttributeIconSize 0
         hide empty members
-    
-        abstract class AbstractClass {
+
+        abstract class ObsBias {
           - privateField
           + publicField
           # protectedField
@@ -27,46 +27,47 @@ ObsBias Design
           {static} staticID
           {abstract} void methods()
            }
-        
+
         class Flight {
            flightNumber : Integer
            departureTime : Date
            }
-        
+
         package "Classic Collections" {
-           
+
            abstract class AbstractList
            abstract AbstractCollection
            interface List
            interface Collection
-           
+
            List <|-- AbstractList
            Collection <|-- AbstractCollection
-           
+
            Collection <|- List
            AbstractCollection <|- AbstractList
            AbstractList <|-- ArrayList
-           
+
            class ArrayList {
              Object[] elementData
              size()
               } 
         }
-        
+
         enum TimeUnit {
           DAYS
           HOURS
           MINUTES
         }
-          
-    
-        class Student {
+
+
+        class ObsSpace {
           Name
         }
-        Student "0..*" -- "1..*" Course
-        (Student, Course) .. Enrollment
         
-        class Enrollment {
+        ObsSpace "0..*" -- "1..*" ObsOperator
+        (ObsSpace, ObsOperator) .. ObsBias
+
+        class ObsOperator {
           drop()
           cancel()
         }
