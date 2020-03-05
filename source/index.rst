@@ -10,7 +10,7 @@ Welcome to JEDI ObsBias Design's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   formulation/formulation
+   formulation/index
    design/design
 
 Indices and tables
