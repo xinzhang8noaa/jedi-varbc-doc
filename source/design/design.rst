@@ -5,75 +5,76 @@ ObsBias Design
 
     @startuml
 
-      package "ObsBias" {
+    package "ObsBiasPackage" {
 
-        package "oops" {
-        }
+      namespace oops.base {
 
-        package "ufo" {
-        }
+          class ObsAuxControls {
+          }
 
-        oops --> "1" ufo
-      }
+          class ObsAuxIncrements {
+            -[] *auxs_;
+          }
 
-        abstract class ObsBias {
-          - privateField
-          + publicField
-          # protectedField
-          ~ packagePrivateField
-          - privateMethod()
-          + publicMethod()
-          # protectedMethod()
-          ~ packagePrivateMethod()
-           }
-    
-        class Dummy {
-          {static} staticID
-          {abstract} void methods()
-           }
+          class ObsAuxCovariances {
+            {static} classname() : string
+          }
 
-        class Flight {
-           flightNumber : Integer
-           departureTime : Date
-           }
+          ObsAuxIncrements --> "1" ObsAuxControls
+          ObsAuxCovariances --> "1" ObsAuxControls
+          ObsAuxCovariances --> "1" ObsAuxIncrements
+  
+      }  /' namespace oops.base '/
 
-        package "Classic Collections" {
+      namespace oops.interface {
+          
+          class ObsAuxControl {
+          }
+          
+          class ObsAuxIncrement {
+          }
 
-           abstract class AbstractList
-           abstract AbstractCollection
-           interface List
-           interface Collection
-
-           List <|-- AbstractList
-           Collection <|-- AbstractCollection
-
-           Collection <|- List
-           AbstractCollection <|- AbstractList
-           AbstractList <|-- ArrayList
-
-           class ArrayList {
-             Object[] elementData
-             size()
-              } 
-        }
-
-        enum TimeUnit {
-          DAYS
-          HOURS
-          MINUTES
-        }
-
-
-        class ObsSpace {
-          Name
-        }
+          class ObsAuxCovariance {
+          }
         
-        ObsSpace "0..*" -- "1..*" ObsOperator
-        (ObsSpace, ObsOperator) .. ObsBias
+          ObsAuxIncrement --> "1" ObsAuxControl
+          ObsAuxCovariance --> "1" ObsAuxControl
+          ObsAuxCovariance --> "1" ObsAuxIncrement
 
-        class ObsOperator {
-          drop()
-          cancel()
-        }
+      }  /' namesapce oops.interface '/
+
+      oops.base.ObsAuxControls --> "0..*" oops.interface.ObsAuxControl
+      oops.base.ObsAuxIncrements --> "0..*" oops.interface.ObsAuxIncrement
+      oops.base.ObsAuxCovariances --> "0..*" oops.interface.ObsAuxCovariance
+      
+      namespace ufo {
+        
+          class ObsBias {
+          }
+          
+          class ObsBiasIncrement {
+            + ObsBiasIncrement(ObsSpace &,  Configuration &) : void
+            + ObsBiasIncrement(ObsBiasIncrement &,  bool) : void
+            + ObsBiasIncrement(ObsBiasIncrement &,  Configuration &) : void
+            + ~ObsBiasIncrement() : void
+            - print(ostream &) : void
+            - biasbase_ : *LinearObsBiasBase
+            - conf_: LocalConfiguration
+          }
+
+          class ObsBiasCovariance {
+          }
+        
+          ObsBiasIncrement --> "1" ObsBias
+          ObsBiasCovariance --> "1" ObsBias
+          ObsBiasCovariance --> "1" ObsBiasIncrement
+        
+      }  /' namespace ufo '/
+      
+      oops.interface.ObsAuxControl --> "1" ufo.ObsBias
+      oops.interface.ObsAuxIncrement --> "1" ufo.ObsBiasIncrement
+      oops.interface.ObsAuxCovariance --> "1" ufo.ObsBiasCovariance
+
+    } /' package ObsBiasComponent '/
 
     @enduml
