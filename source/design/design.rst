@@ -7,7 +7,7 @@ ObsBias Design
 
     package "ObsBiasPackage" {
 
-      namespace oops.base {
+      namespace oops.base #DDDDDD {
 
           class ObsAuxControls {
           }
@@ -26,7 +26,7 @@ ObsBias Design
   
       }  /' namespace oops.base '/
 
-      namespace oops.interface {
+      namespace oops.interface #DDDDDD {
           
           class ObsAuxControl {
           }
@@ -47,7 +47,7 @@ ObsBias Design
       oops.base.ObsAuxIncrements --> "0..*" oops.interface.ObsAuxIncrement
       oops.base.ObsAuxCovariances --> "0..*" oops.interface.ObsAuxCovariance
       
-      namespace ufo {
+      namespace ufo #03fcf0 {
         
           class ObsBias {
           }
