@@ -15,7 +15,7 @@ ObsBias Design
 
           class ObsAuxIncrements <MODEL> {
             {static} classname() : string
-            + ObsAuxIncrements(ObsSpaces_ &, Configuration &) : void
+            + ObsAuxIncrements(ObsSpaces &, Configuration &) : void
             + ObsAuxIncrements(ObsAuxIncrements &, bool) : void
             + ObsAuxIncrements(ObsAuxIncrements &, Configuration &) : void
             + ~ObsAuxIncrements() : void
@@ -53,9 +53,9 @@ ObsBias Design
 
       }  /' namesapce oops.interface '/
 
-      oops.base.ObsAuxControls --> "0..*" oops.interface.ObsAuxControl
-      oops.base.ObsAuxIncrements --> "0..*" oops.interface.ObsAuxIncrement
-      oops.base.ObsAuxCovariances --> "0..*" oops.interface.ObsAuxCovariance
+      oops.base.ObsAuxControls --> "1..*" oops.interface.ObsAuxControl
+      oops.base.ObsAuxIncrements --> "1..*" oops.interface.ObsAuxIncrement
+      oops.base.ObsAuxCovariances --> "1..*" oops.interface.ObsAuxCovariance
       
       namespace ufo #03fcf0 {
         
