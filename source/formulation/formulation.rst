@@ -13,4 +13,4 @@ Formulation
     .. math::
         :label: costf4
 
-        J = \frac{1}{2} {( x - x_b )}^\intercal \mathrm{B}^{-1} ( x - x_b ) + \sum_{t=0}^{T} \frac{1}{2} {( y - H_tM_t(x) )}^\intercal \mathrm{R_t}^{-1} ( y - H_tM_t(x) )
+        J = \frac{1}{2} {( x - x_b )}^\intercal \mathrm{B}^{-1} ( x - x_b ) + \sum_{t=0}^{T} \frac{1}{2} {( y - H_t M_t(x) )}^\intercal \mathrm{R_t}^{-1} ( y - H_t M_t(x) )
