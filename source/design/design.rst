@@ -10,10 +10,16 @@ ObsBias Design
       namespace oops.base #DDDDDD {
 
           class ObsAuxControls {
+            {static} classname() : string
           }
 
-          class ObsAuxIncrements {
-            -[] *auxs_;
+          class ObsAuxIncrements <MODEL> {
+            {static} classname() : string
+            + ObsAuxIncrements(ObsSpaces_ &, Configuration &) : void
+            + ObsAuxIncrements(ObsAuxIncrements &, bool) : void
+            + ObsAuxIncrements(ObsAuxIncrements &, Configuration &) : void
+            + ~ObsAuxIncrements() : void
+            - [] aux: *ObsAuxIncrement
           }
 
           class ObsAuxCovariances {
@@ -31,7 +37,11 @@ ObsBias Design
           class ObsAuxControl {
           }
           
-          class ObsAuxIncrement {
+          class ObsAuxIncrement <MODEL> {
+            + ObsAuxIncrement(ObsSpace<MODEL> &, Configuration &) :v oid
+            + ObsAuxIncrement(ObsAuxIncrement &, bool) : void
+            + ObsAuxIncrement(ObsAuxIncrement &, Configuration &) : void
+            + ~ObsAuxIncrement() : void
           }
 
           class ObsAuxCovariance {
@@ -75,6 +85,6 @@ ObsBias Design
       oops.interface.ObsAuxIncrement --> "1" ufo.ObsBiasIncrement
       oops.interface.ObsAuxCovariance --> "1" ufo.ObsBiasCovariance
 
-    } /' package ObsBiasComponent '/
+    } /' package ObsBiasPackage '/
 
     @enduml
