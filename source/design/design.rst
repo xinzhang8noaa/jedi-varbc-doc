@@ -38,7 +38,7 @@ ObsBias Design
           }
           
           class ObsAuxIncrement <MODEL> {
-            + ObsAuxIncrement(ObsSpace<MODEL> &, Configuration &) :v oid
+            + ObsAuxIncrement(ObsSpace &, Configuration &) :void
             + ObsAuxIncrement(ObsAuxIncrement &, bool) : void
             + ObsAuxIncrement(ObsAuxIncrement &, Configuration &) : void
             + ~ObsAuxIncrement() : void
