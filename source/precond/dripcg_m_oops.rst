@@ -1,12 +1,14 @@
 DRMinimizer Modified
 ++++++++++++++++++++++++++
 
+.. role:: raw-html(raw)
+   :format: html
+
 Use case
 ==========
 
-  DRMinimizer is the base class for all minimizers that use :math:`\textbf{B}` to precondition the variational minimisation problem and use the auxiliary :math:`\hat{x} = \textbf{B}^{-1} \vec{x}` and to update it in parallel to :math:`\vec{x}` based on Derber and Rosati, 1989, J. Phys. Oceanog. 1333-1347.
+  Suupose we have some preconditioner :math:`\textbf{M} \neq \textbf{B}`, see :cite:`2014:zhu` .
 
-  :math:`J_b` is then computed as :math:`\vec{x}^T \hat{x}` eliminating the need for :math:`\textbf{B}^{-1}` or :math:`\textbf{B}^{1/2}` .
 
 Algorithm
 =============
@@ -77,19 +79,22 @@ Solver arguments
       - *dxh* : :math:`\hat{x} = \textbf{B}^{-1} \vec{x}_0`
       - *rhs* : :math:`- \textbf{B}^{-1} \vec{x} + \mathcal{H}^T \textbf{R}^{-1} \vec{y}`
       - *HtRinvH* : :math:`\mathcal{H}^T \textbf{R}^{-1} \mathcal{H}`
-      - *N* : preconditioner
+      - :raw-html:`<font color="red">M</font>` : preconditioner
       - *ninner* : :math:`i_{max}`
       - *gnreduc* : :math:`\varepsilon`
 
-Pseudo code (proposed )
+Pseudo code (proposed changed for DRIPCGMinimizer)
 =====================================================
 
   Interface:
 
     .. code-block:: c++
+      :linenos:
+      :emphasize-lines: 3-4
 
       template<typename MODEL>
       double DRIPCGMinimizer<MODEL>::solve(CtrlInc_ & xx, CtrlInc_ & xh, CtrlInc_ & rr,
+                                          // const Bmat_ & B, const HtRinvH_ & HtRinvH,
                                           const Pmat_ & M, const HtRinvH_ & HtRinvH,
                                           const double costJ0Jb, const double costJ0JoJc,
                                           const int maxiter, const double tolerance) {
@@ -99,7 +104,7 @@ Pseudo code (proposed )
       - *xx* : :math:`\vec{x}_0`
       - *xh* : :math:`\hat{x} = \textbf{B}^{-1} \vec{x}_0`
       - *rr* : :math:`- \textbf{B}^{-1} \vec{x}_0 + \mathcal{H}^T \textbf{R}^{-1} \vec{y}_0`
-      - *M* : preconditioner
+      - :raw-html:`<font color="red">M</font>` : preconditioner
       - *HtRinvH* : :math:`\mathcal{H}^T \textbf{R}^{-1} \mathcal{H}`
       - *maxiter* : :math:`i_{max}`
       - *tolerance* : :math:`\varepsilon`
@@ -108,7 +113,7 @@ Pseudo code (proposed )
 
     .. math::
 
-      &\textbf{Input:} \quad \vec{xx}_0, \ \vec{xh}_0, \ \vec{rr}_0, \ \textbf{M}, \ \mathcal{H}^T \textbf{R}^{-1} \mathcal{H}, \ maxiter, \ tolerance \\ 
+      &\textbf{Input:} \quad \vec{xx}_0, \ \vec{xh}_0, \ \vec{rr}_0, \ \color{red}{\textbf{M}}, \ \mathcal{H}^T \textbf{R}^{-1} \mathcal{H}, \ maxiter, \ tolerance \\ 
       &\textbf{Output:} \quad \vec{xx}, \ \vec{xh}, \ \vec{rr} \\ 
       &\textbf{Subroutine:} \quad \textbf{lmp} \qquad (preconditioner) \\ 
       &\textbf{Algorithm:} \\ 
@@ -116,7 +121,7 @@ Pseudo code (proposed )
       &\qquad \vec{r}_0 \Leftarrow \vec{rr} \\ 
       &\qquad \\ 
       &\qquad \vec{sh} \Leftarrow \textbf{lmp} \cdot \vec{rr} \\
-      &\qquad \vec{ss} \Leftarrow \textbf{M} \cdot \vec{sh} \\
+      &\qquad \vec{ss} \Leftarrow \color{red}{\textbf{M}} \cdot \vec{sh} \\
       &\qquad \\
       &\qquad dotRr0 \Leftarrow \vec{rr}^T \cdot \vec{rr} \\ 
       &\qquad dotSr0 \Leftarrow \vec{rr}^T \cdot \vec{ss} \\ 
@@ -146,7 +151,7 @@ Pseudo code (proposed )
       &\qquad \qquad \qquad \vec{rr} \Leftarrow \vec{rr} - \sum_{k=0}^{i-1} \frac{\vec{rr}^T \cdot \vec{ss}_k}{rdots_k} * \vec{rr}_k \\
       &\qquad \qquad \qquad \\
       &\qquad \qquad \qquad \vec{sh} \Leftarrow \textbf{lmp} \cdot \vec{rr} \\ 
-      &\qquad \qquad \qquad \vec{ss} \Leftarrow \textbf{M} \cdot \vec{sh} \\
+      &\qquad \qquad \qquad \vec{ss} \Leftarrow \color{red}{\textbf{M}} \cdot \vec{sh} \\
       &\qquad \qquad \qquad \\
       &\qquad \qquad \qquad rdots_{old} \Leftarrow rdots \\ 
       &\qquad \qquad \qquad rdots \Leftarrow \vec{rr}^T \cdot \vec{ss} \\ 
@@ -160,3 +165,5 @@ Pseudo code (proposed )
       &\qquad \qquad \qquad \vec{ph} \Leftarrow \vec{sh} + \beta * \vec{ph} \\
       &\qquad \qquad \qquad \\
       &\qquad \qquad \qquad i \Leftarrow i + 1
+
+ .. bibliography:: refs.bib
