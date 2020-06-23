@@ -12,6 +12,7 @@ Welcome to JEDI ObsBias Design's documentation!
 
    formulation/index
    design/design
+   precond/index
 
 Indices and tables
 ==================
