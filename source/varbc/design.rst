@@ -1,4 +1,4 @@
-ObsBias Design
+VarBC Design
 +++++++++++++++++++++
 
 .. uml::

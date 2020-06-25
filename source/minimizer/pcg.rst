@@ -1,6 +1,9 @@
 Preconditioned Conjugate Gradient
 -------------------------------------
 
+For more details, please refer to :cite:`NoceWrig06`
+
+
   Instead of solving：
 
     .. math::

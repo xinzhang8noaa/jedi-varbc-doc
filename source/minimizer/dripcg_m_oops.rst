@@ -7,7 +7,7 @@ DRMinimizer Modified
 Use case
 ==========
 
-  Suupose we have some preconditioner :math:`\textbf{M} \neq \textbf{B}`, see :cite:`2014:zhu` .
+  Suupose we have some preconditioner :math:`\textbf{M} \neq \textbf{B}`, see :cite:`ZhuVarBC14` .
 
 
 Algorithm
@@ -165,5 +165,3 @@ Pseudo code (proposed changed for DRIPCGMinimizer)
       &\qquad \qquad \qquad \vec{ph} \Leftarrow \vec{sh} + \beta * \vec{ph} \\
       &\qquad \qquad \qquad \\
       &\qquad \qquad \qquad i \Leftarrow i + 1
-
- .. bibliography:: refs.bib

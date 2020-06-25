@@ -11,8 +11,11 @@ Welcome to JEDI ObsBias Design's documentation!
    :caption: Contents:
 
    formulation/index
-   design/design
-   precond/index
+   minimizer/index
+   varbc/implementation
+   varbc/design
+   zreferences
+
 
 Indices and tables
 ==================
