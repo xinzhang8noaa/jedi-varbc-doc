@@ -2,13 +2,14 @@ VarBC implementation
 +++++++++++++++++++++++++
 
 .. role:: raw-html(raw)
-   :format: html
+  :format: html
 
-Summary from 
-=============
+.. note::
 
-  - :cite:`ZhuVarBC14`
-  - :cite:`DDVarBC04`
+  Summarized from :
+
+    - :cite:`ZhuVarBC14`
+    - :cite:`DDVarBC04`
 
 Adaptive bias correction
 ============================
