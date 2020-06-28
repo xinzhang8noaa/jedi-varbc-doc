@@ -43,7 +43,7 @@ Augmentated control variable
 
     .. math::
 
-      J(\vec{z}) = \frac{1}{2} (\vec{z}_b - \vec{z})^T \mathcal{Z}^{-1} (\vec{z}_b - \vec{z}) +  \frac{1}{2} (\vec{y} - \tilde{H}(\vec{z}))^T \mathcal{R}^{-1} (\vec{y} - \tilde{H}(\vec{z}))
+      J(\vec{z}) = \frac{1}{2} (\vec{z}_b - \vec{z})^T \textbf{Z}^{-1} (\vec{z}_b - \vec{z}) +  \frac{1}{2} (\vec{y} - \tilde{H}(\vec{z}))^T \textbf{R}^{-1} (\vec{y} - \tilde{H}(\vec{z}))
 
   where
 
@@ -80,18 +80,18 @@ Background error covariance
 
     .. math::
 
-      \mathcal{Z} = \begin{bmatrix}
-                      \mathcal{B}_x & 0 \\
-                      0 & \mathcal{B}_{\beta}
+      \textbf{Z} = \begin{bmatrix}
+                      \textbf{B}_x & 0 \\
+                      0 & \textbf{B}_{\beta}
                     \end{bmatrix}
 
-  where :math:`\mathcal{B}_x` denotes the usual (state) background error covariance, and :math:`\mathcal{B}_\beta` the parameter background error covariance.
+  where :math:`\textbf{B}_x` denotes the usual (state) background error covariance, and :math:`\textbf{B}_\beta` the parameter background error covariance.
 
-  We take :math:`\mathcal{B}_\beta` diagonal:
+  We take :math:`\textbf{B}_\beta` diagonal:
 
     .. math::
 
-      \mathcal{B}_\beta & = diag(\sigma_{\beta_1}^2, ...., \sigma_{\beta_n}^2)  \\
+      \textbf{B}_\beta & = diag(\sigma_{\beta_1}^2, ...., \sigma_{\beta_n}^2)  \\
                         & = \begin{bmatrix}
                               \sigma_{\beta_1}^2 & &   \\
                               & \ddots &  \\
@@ -124,12 +124,12 @@ Preconditioning
     .. math::
       :label: HessianX
 
-      \frac{\partial^2 J}{\partial \vec{x}^2} \Bigg{\vert}_{\vec{x} =\vec{x}_a} = \mathcal{B}_{\vec{x}}^{-1} + \mathcal{H}_{\vec{x}}^T \mathcal{R}^{-1} \mathcal{H}_{\vec{x}}, \qquad \mathcal{H}_{\vec{x}} = \frac{\partial H}{\partial \vec{x}} \Bigg{\vert}_{\vec{x}=\vec{x}_a}
+      \frac{\partial^2 J}{\partial \vec{x}^2} \Bigg{\vert}_{\vec{x} =\vec{x}_a} = \textbf{B}_{\vec{x}}^{-1} + \mathcal{H}_{\vec{x}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{x}}, \qquad \mathcal{H}_{\vec{x}} = \frac{\partial H}{\partial \vec{x}} \Bigg{\vert}_{\vec{x}=\vec{x}_a}
 
     .. math::
       :label: HessianBeta
 
-      \frac{\partial^2 J}{\partial \vec{\beta}^2} \Bigg{\vert}_{\vec{\beta} =\vec{\beta}_a} = \mathcal{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \mathcal{R}^{-1} \mathcal{H}_{\vec{\beta}}, \qquad \mathcal{H}_{\vec{\beta}} = \frac{\partial H}{\partial \vec{\beta}} \Bigg{\vert}_{\vec{\beta}=\vec{\beta}_a}
+      \frac{\partial^2 J}{\partial \vec{\beta}^2} \Bigg{\vert}_{\vec{\beta} =\vec{\beta}_a} = \textbf{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{\beta}}, \qquad \mathcal{H}_{\vec{\beta}} = \frac{\partial H}{\partial \vec{\beta}} \Bigg{\vert}_{\vec{\beta}=\vec{\beta}_a}
 
   The ideal change of variable would therefore be the symmetric square root of the Hessian, since this would result in a perfectly isotropic cost function in control space.
 
@@ -139,7 +139,7 @@ Preconditioning
 
       .. math::
 
-            \vec{\chi}_{\vec{x}} = \mathcal{B}^{-1/2} (\vec{x}_b - \vec{x})
+            \vec{\chi}_{\vec{x}} = \textbf{B}^{-1/2} (\vec{x}_b - \vec{x})
 
     Usually this works quite well, because the information in the background tends to dominate the information in the observations.
 
@@ -186,15 +186,15 @@ Preconditioning
 
   where most likely :math:`m >> n`, :math:`m` is the number of observations; :math:`n` is the number of parameters.
 
-  The observational contribution to the Hessian depends primarily on the number of observations (the number of rows of :math:`\mathcal{H}_{\beta}`), on the observation error variances (the diagonal of :math:`\mathcal{R}`), and on the second moments of the predictors (the elements of :math:`\mathcal{H}_{\beta}^T \mathcal{H}_{\beta}`). 
+  The observational contribution to the Hessian depends primarily on the number of observations (the number of rows of :math:`\mathcal{H}_{\beta}`), on the observation error variances (the diagonal of :math:`\textbf{R}`), and on the second moments of the predictors (the elements of :math:`\mathcal{H}_{\beta}^T \mathcal{H}_{\beta}`). 
 
-  Consider a channel :math:`k`, containning :math:`m` observations with error standard deviation :math:`\sigma_{o}`. Support that the bias model for this channel is based on :math:`n` predictors, and let the :math:`n × n` matrix :math:`\mathcal{C}` denote an estimate of the globally averaged covariance of those predictors. Then the ideal change of variable would be
+  Consider a channel :math:`k`, containning :math:`m` observations with error standard deviation :math:`\sigma_{o}`. Support that the bias model for this channel is based on :math:`n` predictors, and let the :math:`n × n` matrix :math:`\textbf{C}` denote an estimate of the globally averaged covariance of those predictors. Then the ideal change of variable would be
 
     .. math::
 
-      \mathcal{L}^k = {\Bigg\lbrack \mathcal{B}_{\beta}^{-1} + \frac{m}{\sigma_o^2} \mathcal{C} \Bigg\rbrack }^{1/2}
+      \mathcal{L}^k = {\Bigg\lbrack \textbf{B}_{\beta}^{-1} + \frac{m}{\sigma_o^2} \textbf{C} \Bigg\rbrack }^{1/2}
 
-  where :math:`\mathcal{B}_{\beta}` is the :math:`n × n` matrix of background error covariances associated with the :math:`n` bias parameters for this channel. :raw-html:`<font color="red">This expression is easy to compute prior to the minimization</font>`. We then define the change of variable for the bias parameters by
+  where :math:`\textbf{B}_{\beta}` is the :math:`n × n` matrix of background error covariances associated with the :math:`n` bias parameters for this channel. :raw-html:`<font color="red">This expression is easy to compute prior to the minimization</font>`. We then define the change of variable for the bias parameters by
 
     .. math::
 
