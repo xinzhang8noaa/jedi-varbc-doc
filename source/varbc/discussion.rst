@@ -7,9 +7,9 @@ VarBC implementation discussion
     
         .. math::
         
-            \frac{\partial^2 J}{\partial \vec{x}^2} \Bigg\vert_{\vec{x} = \vec{x}_b} = \textb{B}_{\vec{x}}^{-1} + \mathcal{H}_{\vec{x}}^T \textb{R}^{-1} \mathcal{H}_{\vec{x}}
+            \frac{\partial^2 J}{\partial \vec{x}^2} \Bigg\vert_{\vec{x} = \vec{x}_b} = \textbf{B}_{\vec{x}}^{-1} + \mathcal{H}_{\vec{x}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{x}}
             
-        it is popular to ignore the contribution from observation and use :math:`\mathcal{L}_\vec{x} = \textb{B}^{-1/2}` (for example: ECMWF DA, WRFDA) or :math:`\mathcal{L}_\vec{x} = \textb{B}^{-1}` (for example: GSI) as preconditioner, thus define a new control variable
+        it is popular to ignore the contribution from observation and use :math:`\mathcal{L}_\vec{x} = \textbf{B}^{-1/2}` (for example: ECMWF DA, WRFDA) or :math:`\mathcal{L}_\vec{x} = \textbf{B}^{-1}` (for example: GSI) as preconditioner, thus define a new control variable
 
         .. math::
 
@@ -19,14 +19,14 @@ VarBC implementation discussion
 
         .. math::
 
-            \frac{\partial^2 J}{\partial \vec{\beta}^2} \Bigg\vert_{\vec{\beta} = \vec{\beta}_b} = \textb{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \textb{R}^{-1} \mathcal{H}_{\vec{\beta}}
+            \frac{\partial^2 J}{\partial \vec{\beta}^2} \Bigg\vert_{\vec{\beta} = \vec{\beta}_b} = \textbf{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{\beta}}
 
         due to the major contributionis come from observations, therfore, the full Hessian is recommended to use as preconditioner(trivial to compute before minimization for the linear bias model)
 
         .. math::
 
             \vec{\chi}_\vec{\beta} & = \mathcal{L}_\vec{\beta} ( \vec{\beta}_b - \vec{\beta} ) \\
-                                   & = (\textb{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \textb{R}^{-1} \mathcal{H}_{\vec{\beta}}) ( \vec{\beta}_b - \vec{\beta} )
+                                   & = (\textbf{B}_{\vec{\beta}}^{-1} + \mathcal{H}_{\vec{\beta}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{\beta}}) ( \vec{\beta}_b - \vec{\beta} )
 
 Minimizers in OOPS
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -99,7 +99,7 @@ Minimizers in OOPS
 
             #. DRMinimizer
 
-                use :math:`\textb{B}` to precondition the variational minimisation problem and use the auxiliary variable :math:`\hat{\vec{x}}=\textb{B}^{-1} \vec{x}` and to update it in parallel to :math:`\vec{x}`                
+                use :math:`\textbf{B}` to precondition the variational minimisation problem and use the auxiliary variable :math:`\hat{\vec{x}}=\textbf{B}^{-1} \vec{x}` and to update it in parallel to :math:`\vec{x}`                
 
                 * Algorithm
 
@@ -175,9 +175,9 @@ Minimizers in OOPS
 Proposed changes
 ^^^^^^^^^^^^^^^^^^^^^
 
-        From tha code snippets demonstared above. :code:`Bmat_` (:code:`BMatrix`) has been used almost everywhere and the :math:`\textb{B}^{-1}` is used as the preconditioner, which means only the :math:`\textb{B}_{\vec{x}}^{-1}` and :math:`\textb{B}_{\vec{\beta}}^{-1}` can be used for preconditionning under current interfaces. 
+        From tha code snippets demonstared above. :code:`Bmat_` (:code:`BMatrix`) has been used almost everywhere and the :math:`\textbf{B}^{-1}` is used as the preconditioner, which means only the :math:`\textbf{B}_{\vec{x}}^{-1}` and :math:`\textbf{B}_{\vec{\beta}}^{-1}` can be used for preconditionning under current interfaces. 
 
-        A new class :code:`oops::PMatrix` should be designed to accomodate the needs to contain both :math:`\textb{B}^{-1}` and :math:`\mathcal{H}^T \textb{R}^{-1} \mathcal{H}`, also the needs to use :math:`\textb{B}^{-\frac{1}{2}}` as preconditioner.
+        A new class :code:`oops::PMatrix` should be designed to accomodate the needs to contain both :math:`\textbf{B}^{-1}` and :math:`\mathcal{H}^T \textbf{R}^{-1} \mathcal{H}`, also the needs to use :math:`\textbf{B}^{-\frac{1}{2}}` as preconditioner.
 
         Here is the proposed design:
 
@@ -265,7 +265,7 @@ Proposed changes
 
             .. math::
 
-                \mathcal{L} =  (\textb{B}_{\vec{x}}^{-1} + \textbf{B}_{\vec{\beta}}^{-1}) + \textbf{H}_{\vec{\beta}}^T \textb{R}^{-1} \mathcal{H}_{\vec{\beta}}
+                \mathcal{L} =  (\textbf{B}_{\vec{x}}^{-1} + \textbf{B}_{\vec{\beta}}^{-1}) + \textbf{H}_{\vec{\beta}}^T \textbf{R}^{-1} \mathcal{H}_{\vec{\beta}}
 
 
             .. uml::
