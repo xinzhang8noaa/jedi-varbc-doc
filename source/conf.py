@@ -51,6 +51,7 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinxcontrib.plantuml',
     'sphinxcontrib.bibtex',
+    'sphinx.ext.autosectionlabel'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

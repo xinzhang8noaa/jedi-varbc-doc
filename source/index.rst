@@ -13,6 +13,7 @@ Welcome to JEDI ObsBias Design's documentation!
    formulation/index
    minimizer/index
    varbc/implementation
+   varbc/discussion
    varbc/design
    zreferences
 
