@@ -58,7 +58,14 @@ Variation Observation Bias correction
 
     .. math::
 
-      \tilde{H}(\vec{z}) = H(\vec{x}) + P(\vec{x}) \vec{\beta}
+      \tilde{H}(\vec{z}) & =  \begin{bmatrix}
+                                H & P  \\
+                              \end{bmatrix} \cdot
+                              \begin{bmatrix}
+                                 \vec{x} \\
+                                 \vec{\beta} \\
+                              \end{bmatrix} \\
+                          & = H(\vec{x}) + P(\vec{x}) \vec{\beta}
 
   In general the parameter estimation errors will be correlated with the state estimation errors, because they depend on the same data. We know of no practical way to account for this statistical dependence, and therefore take
 
@@ -73,7 +80,7 @@ Variation Observation Bias correction
 
   We take :math:`\textbf{B}_\beta` diagonal:
   
-  Also define define :math:`\vec{\delta{x}} = \vec{z} -\vec{z}_b`, then *Increment form* is :
+  Also define define :math:`\vec{\delta{z}} = \vec{z} -\vec{z}_b`, then the *Increment form* is :
 
     .. math::
       :label: Incremental3dvarVarBC
@@ -93,7 +100,14 @@ Variation Observation Bias correction
 
       .. math::
 
-        \tilde{\mathcal{H}}(\vec{\delta{z}}) = \mathcal{H} \vert_{\vec{x}_b} \vec{\delta x} + P \vert_{\vec{x}_b} \vec{\delta{\beta}}
+        \tilde{\mathcal{H}}(\vec{\delta{z}}) & = \begin{bmatrix}
+                                                   \mathcal{H} \vert_{\vec{x}_b} & P \vert_{\vec{x}_b} \\
+                                                 \end{bmatrix} \cdot
+                                                 \begin{bmatrix}
+                                                   \vec{\delta{x}} \\
+                                                   \vec{\delta{\beta}} \\
+                                                 \end{bmatrix} \\
+             & = \mathcal{H} \vert_{\vec{x}_b} \vec{\delta{x}} + P \vert_{\vec{x}_b} \vec{\delta{\beta}}
 
     - Innovation
 
