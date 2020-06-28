@@ -1,7 +1,7 @@
 3DVAR
 ----------------
 
-Standard 3DVAR
+Genral form
 ^^^^^^^^^^^^^^^^^
 
   .. math::
@@ -20,6 +20,9 @@ Standard 3DVAR
 
   where :math:`\mathcal{H} = \frac{\partial H}{\partial \vec{x}} \Bigg \vert_{\vec{x}=\vec{x}_b}`, called *Linear observation operator*
 
+Incremental form
+^^^^^^^^^^^^^^^^^^
+
   :eq:`costf3` can be writted as incremental form
 
     .. math::
@@ -31,6 +34,10 @@ Standard 3DVAR
            \vec{\delta{x}}^T \mathcal{H}^T \textbf{R}^{-1} \vec{d} + \frac{1}{2} \vec{d}^T \textbf{R}^{-1} \vec{d}
 
   where :math:`\vec{d} = \vec{y} - H(\vec{x}_b)`, called *Innovation*
+
+
+gradient
+^^^^^^^^^^^^^^
 
   :eq:`Incremental3dvar` is a `quadratic eqautaion <https://en.wikipedia.org/wiki/Quadratic_equation>`_, then, to find the :math:`\vec{\delta{x}}` which minimizeds :math:`J`
 
@@ -87,6 +94,7 @@ Variation Observation Bias correction
 
       J(\vec{\delta{z}}) = \frac{1}{2} \vec{\delta{z}}^T ( \textbf{Z}^{-1} + \tilde{\mathcal{H}}^T \textbf{R}^{-1} \tilde{\mathcal{H}}) \vec{\delta{z}} -
            \vec{\delta{z}}^T \tilde{\mathcal{H}}^T \textbf{R}^{-1} \vec{\tilde{d}} + \frac{1}{2} \vec{d}^T \textbf{R}^{-1} \vec{\tilde{d}}
+
 
   The gradient is
 
