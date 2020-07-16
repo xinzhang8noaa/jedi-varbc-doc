@@ -1,6 +1,10 @@
 VarBC Design
 +++++++++++++++++++++
 
+.. note::
+
+  Discussion
+  
 .. uml::
 
     @startuml

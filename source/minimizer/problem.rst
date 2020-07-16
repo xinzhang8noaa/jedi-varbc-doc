@@ -1,6 +1,10 @@
 Problem
 ---------------------
 
+  .. note::
+
+    Discussion
+
   .. math::
 
     (\textbf{B}^{-1} + \mathcal{H}^T \textbf{R}^{-1} \mathcal{H}) \vec{x} = \mathcal{H}^T \textbf{R}^{-1} \vec{y}

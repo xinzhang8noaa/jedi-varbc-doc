@@ -1,6 +1,10 @@
 Preconditioned Conjugate Gradient
 -------------------------------------
 
+.. note::
+
+  Discussion
+
 For more details, please refer to :cite:`NoceWrig06`
 
 

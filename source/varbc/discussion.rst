@@ -1,6 +1,10 @@
 VarBC implementation discussion
 ----------------------------------
 
+    .. note::
+    
+      Discussion
+
     In summary, according to :cite:`DDVarBC04` and :cite:`ZhuVarBC14`:
 
     1. For the background term, the Hessian is 

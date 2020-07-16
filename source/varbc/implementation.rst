@@ -6,6 +6,10 @@ VarBC implementation
 
 .. note::
 
+  Discussion
+  
+.. note::
+
   Summarized from :
 
     - :cite:`ZhuVarBC14`

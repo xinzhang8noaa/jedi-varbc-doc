@@ -1,6 +1,10 @@
 DRMinimizer 
 ++++++++++++++++++
 
+.. note::
+
+  Discussion
+  
 Use case
 ==========
 

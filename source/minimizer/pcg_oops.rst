@@ -1,6 +1,10 @@
 PrimalMinimizer 
 ++++++++++++++++++++++++++++++
 
+.. note::
+
+  Discussion
+
 Use case
 ================
 
